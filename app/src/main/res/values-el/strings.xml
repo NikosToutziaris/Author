@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Author</string>
+    <string name="author_label">Author</string>
+    <string name="label_title">Title</string>
+    <string name="genre_label">Genre</string>
+    <string name="button_search">Search</string>
+    <string name="label_info">Info</string>
+</resources>
