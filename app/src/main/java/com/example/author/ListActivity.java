@@ -13,6 +13,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.example.author.classes.DataStore;
+import com.example.author.classes.LazyAdapter;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -46,14 +47,16 @@ public class ListActivity extends AppCompatActivity {
 
         DataStore.LoadBooks(filterAuthor, filterTitle, filterGenreId);
 
+        LazyAdapter booksAdapter = new LazyAdapter(this, DataStore.Books);
+
         //COMPLEX OBJECT BINDING
-        ListAdapter booksAdapter = new SimpleAdapter(
-                this,
-                DataStore.Books,
-                R.layout.list_item,
-                new String[] {DataStore.KEY_TITLE, DataStore.KEY_AUTHOR, DataStore.KEY_GENRENAME},
-                new int[] {R.id.book_item_title, R.id.book_item_author, R.id.book_item_genre}
-        );
+        //ListAdapter booksAdapter = new SimpleAdapter(
+        //        this,
+        //        DataStore.Books,
+        //        R.layout.list_item,
+        //        new String[] {DataStore.KEY_TITLE, DataStore.KEY_AUTHOR, DataStore.KEY_GENRENAME},
+        //        new int[] {R.id.book_item_title, R.id.book_item_author, R.id.book_item_genre}
+        //);
         listViewBooks.setAdapter(booksAdapter);
 
        listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {

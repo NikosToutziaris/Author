@@ -7,9 +7,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.author.classes.DataStore;
+import com.example.author.classes.ImageLoader;
 
 import java.util.HashMap;
 
@@ -19,6 +21,8 @@ public class DetailsActivity extends AppCompatActivity {
     TextView textViewAuthor;
     TextView textViewGenre;
     Button buttonVisitWebsite;
+    ImageView imageViewCover;
+    ImageLoader imageLoader;
 
     HashMap<String, Object> book = null;
 
@@ -27,6 +31,7 @@ public class DetailsActivity extends AppCompatActivity {
         textViewAuthor = (TextView)findViewById(R.id.book_details_author);
         textViewGenre = (TextView)findViewById(R.id.book_details_genre);
         buttonVisitWebsite = (Button)findViewById(R.id.buttonVisitWebsite);
+        imageViewCover = (ImageView)findViewById(R.id.imageViewCover);
     }
 
     @Override
@@ -53,6 +58,10 @@ public class DetailsActivity extends AppCompatActivity {
         buttonVisitWebsite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String bookCoverUrl = (String)book.get(DataStore.KEY_COVERURL);
+                imageLoader = new ImageLoader(getApplicationContext());
+                imageLoader.DisplayImage(bookCoverUrl, imageViewCover);
                 String bookAmazonUrl = (String)book.get(DataStore.KEY_AMAZONURL);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(bookAmazonUrl));
                 startActivity(browserIntent);
