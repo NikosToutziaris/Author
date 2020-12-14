@@ -35,9 +35,14 @@ public class DataStore {
 
     public static void LoadBooks(String filterAuthor, String filterTitle, int filterGenreId) {
         DataStore.Books.clear();
+        //Read json from file in Assets
         String contents = AssetsUtils.getFileContentsFromAssets(AppContext, "books.json");
+        filterAuthor = NetworkUtils.UrlEncode(filterAuthor);
+        filterTitle = NetworkUtils.UrlEncode(filterTitle);
+        //Read json from Url
         //String urlString = String.format("http://informatics.teicm.gr/msc/android/books_sample.json.txt?author=%s&title=%s&genreid=%d", filterAuthor, filterTitle, filterGenreId);
         //String contents = NetworkUtils.getFileContentsFromFromUrl(urlString);
+
         JSONObject json = JsonParser.getJsonObject(contents);
         JSONArray jBooks = json.optJSONArray("Books");
         if (jBooks == null) return;
